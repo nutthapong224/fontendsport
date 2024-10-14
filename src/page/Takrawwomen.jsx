@@ -12,15 +12,9 @@ import { useNavigate } from "react-router-dom";
 import playerfootball from "../assets/football.jpg";
 import playerfutsal from "../assets/fulsal.jpg";
 import playerbasketball from "../assets/basketball.jpg";
-import playervolleyball from "../assets/volleyball.jpg";
-import playertabletenis from "../assets/tabletenis.jpg";
-import playerpetanque from "../assets/petanque.jpg";
-import playerbadminton from "../assets/badminton.jpg";
-import playertakraw from "../assets/takraw.jpg";
-import hooptakraw from "../assets/hooptakraw.jpg";
-import esport from "../assets/esport.jpg";
 
-const Createplayer = () => {
+
+const Takrawwomen = () => {
   const navigate = useNavigate();
 
   const theme = useTheme();
@@ -28,16 +22,11 @@ const Createplayer = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-    { label: "ฟุตบอล", path: "/football", icon: playerfootball },
-    { label: "ฟุตซอล", path: "/fulsalpage", icon: playerfutsal },
-    { label: "บาสเก็ตบอล", path: "/basketballpage", icon: playerbasketball },
-    { label: "วอลเลย์บอล", path: "/volleyballpage", icon: playervolleyball },
-    { label: "เทเบิลเทนิส", path: "/tabletenispage", icon: playertabletenis },
-    { label: "เปตอง", path: "/petanquepage", icon: playerpetanque },
-    { label: "แบตมินตัน", path: "/badmintonpage", icon: playerbadminton },
-    { label: "เซปักตะกร้อ", path: "/takrawpage", icon: playertakraw },
-    { label: "ตะกร้อลอดห่วง", path: "/hooptakraw", icon: hooptakraw },
-    { label: "Esport", path: "/esport", icon: esport },
+  
+    { label: "เซปักตะกร้อหญิงเดี่ยว", path: "/takrawsinglewomen", icon: playerfutsal },
+    { label: "เซปักตะกร้อหญิงคู่", path: "/takrawdoublewomen", icon: playerbasketball }
+  
+  
   ];
 
   return (
@@ -46,7 +35,7 @@ const Createplayer = () => {
         variant={isMobileView ? "h5" : "h4"} // Adjust font size for mobile
         gutterBottom
       >
-        ลงทะเบียนนักกีฬา
+        ลงทะเบียนตะกร้อ
       </Typography>
 
       <ImageList
@@ -91,4 +80,4 @@ const Createplayer = () => {
   );
 };
 
-export default Createplayer;
+export default Takrawwomen;

@@ -148,7 +148,7 @@ const Badmintonsinglewomen = () => {
       <Card variant="outlined" sx={{ mt: 4 }}>
         <CardContent>
           <Typography variant="h4" component="h2" gutterBottom align="center">
-            แบตมินตันชายเดี่ยว
+            แบตมินตันหญิงเดี่ยว
           </Typography>
           {message && <Alert severity="info">{message}</Alert>}{" "}
           <form onSubmit={handleSubmit} style={{ width: "100%" }}>

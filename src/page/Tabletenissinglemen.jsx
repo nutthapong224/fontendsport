@@ -22,7 +22,7 @@ const Createplayer = () => {
     fname: "",
     lname: "",
     sporttypes: "เทเบิลเทนนิสชายเดี่ยว",
-    campus: "", // Campus field
+    campus: "", 
   });
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -148,7 +148,7 @@ const Createplayer = () => {
       <Card variant="outlined" sx={{ mt: 4 }}>
         <CardContent>
           <Typography variant="h4" component="h2" gutterBottom align="center">
-            ลงทะเบียนผู้เล่น
+          เทเบิลเทนนิสชายเดี่ยว
           </Typography>
           {message && <Alert severity="info">{message}</Alert>}{" "}
           {/* Display messages */}
