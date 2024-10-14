@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import { apiRequest } from "../api";
 import {
@@ -28,6 +29,8 @@ const SearchPlayers = () => {
   const [sportTypes, setSportTypes] = useState([]);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const fetchCampuses = async () => {
@@ -98,10 +101,10 @@ const SearchPlayers = () => {
     setSportType(event.target.value);
   };
 
-  // Add a function to handle the button click for a player
+  // Handle the button click to navigate to player details page
   const handleButtonClick = (player) => {
-    console.log("Button clicked for:", player);
-    // Add your desired functionality here, e.g., navigate to player details page
+  
+    navigate(`/player/${player.player_id}`);
   };
 
   return (

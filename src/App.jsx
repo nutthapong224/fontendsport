@@ -49,8 +49,9 @@ import Badmintonmen from "./page/Badmintonmen";
 import Badmintonwomen from "./page/Badmintonwomen"; 
 import Takrawpage from "./page/Takrawpage"; 
 import Takrawwomen from "./page/Takrawwomen"; 
-import Takrawmenpage from "./page/Takrawmenpage";
-
+import Takrawmenpage from "./page/Takrawmenpage"; 
+import Playerdetail from "./page/Playerdetail"; 
+import CoachDetail from "./page/Coachdetail";
 
 
 
@@ -61,33 +62,30 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} /> 
-   
-
+        <Route path="/" element={<Home />} />
+        <Route path="/player/:id" element={<Playerdetail />} />
+        <Route path="/coach/:id" element={<CoachDetail />} />
         <Route path="/createcoach" element={<CreateCoach />} />
         <Route path="/football" element={<CreatePlayerfootball />} />
         <Route path="/basketballmen" element={<Createplayerbasketballmen />} />
-        <Route path="/volleyballpage" element={<Volleyballpage />} /> 
-        <Route path="/tabletenispage" element={<Tabletenispage/>} /> 
-        <Route path="/tabletenismen" element={<Tabletenismen/>} /> 
-        <Route path="/tableteniswomen" element={<Tableteniswomen/>} /> 
-        <Route path="/petanquepage" element={<Petanquepage/>} /> 
-        <Route path="/petanquemen" element={<Petanquemen/>} />
-        <Route path="/petanquewomen" element={<Petanquewomen/>} />
-        <Route path="/badmintonpage" element={<Badmintonpage/>} /> 
-        <Route path="/badmintonmen" element={<Badmintonmen/>} /> 
-        <Route path="/badmintonwomen" element={<Badmintonwomen/>} />
+        <Route path="/volleyballpage" element={<Volleyballpage />} />
+        <Route path="/tabletenispage" element={<Tabletenispage />} />
+        <Route path="/tabletenismen" element={<Tabletenismen />} />
+        <Route path="/tableteniswomen" element={<Tableteniswomen />} />
+        <Route path="/petanquepage" element={<Petanquepage />} />
+        <Route path="/petanquemen" element={<Petanquemen />} />
+        <Route path="/petanquewomen" element={<Petanquewomen />} />
+        <Route path="/badmintonpage" element={<Badmintonpage />} />
+        <Route path="/badmintonmen" element={<Badmintonmen />} />
+        <Route path="/badmintonwomen" element={<Badmintonwomen />} />
         <Route
           path="/basketballwomen"
           element={<Createplayerbasketballwomen />}
-        />  
-            <Route path="/basketballpage" element={<Basketballpage />} />
-          <Route
-          path="/fulsalpage"
-          element={<Fulsalpage />}
         />
-        <Route path="/hooptakraw" element={<Hooptakraw />} /> 
-    
+        <Route path="/basketballpage" element={<Basketballpage />} />
+        <Route path="/fulsalpage" element={<Fulsalpage />} />
+        <Route path="/hooptakraw" element={<Hooptakraw />} />
+
         <Route path="/petanquesinglemen" element={<Petanquesinglemen />} />
         <Route path="/petanquesinglewomen" element={<Petanquesinglewomen />} />
         <Route path="/petanquedoublewomen" element={<Petanquedoublewomen />} />
@@ -104,9 +102,9 @@ function App() {
         <Route path="/takrawdoublewomen" element={<Takrawdoublewomen />} />
         <Route path="/takrawsinglemen" element={<Takrawsinglemen />} />
         <Route path="/takrawsinglewomen" element={<Takrawsinglewomen />} />
-        <Route path="/takrawteammen" element={<Takrawteammen />} /> 
-        <Route path="/takrawpage" element={<Takrawpage />} /> 
-        <Route path="/takrawmenpage" element={<Takrawmenpage />} /> 
+        <Route path="/takrawteammen" element={<Takrawteammen />} />
+        <Route path="/takrawpage" element={<Takrawpage />} />
+        <Route path="/takrawmenpage" element={<Takrawmenpage />} />
         <Route path="/takrawwomenpage" element={<Takrawwomen />} />
         <Route path="/futsalmen" element={<Futsalsinglemen />} />
         <Route path="/futsalwomen" element={<Futsalsinglewomen />} />

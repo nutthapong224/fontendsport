@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "axios"; 
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { apiRequest } from "../api"; // Adjust the import path as necessary
 import {
   FormControl,
@@ -27,7 +28,7 @@ const SearchCoaches = () => {
   const [message, setMessage] = useState("");
   const [sportTypes, setSportTypes] = useState([]); // State for sport types
   const [sportType, setSportType] = useState(""); // State for selected sport type
-
+  const navigate = useNavigate(); // Initialize navigate
   // Fetch campuses on component mount
   useEffect(() => {
     const fetchCampuses = async () => {
@@ -103,6 +104,14 @@ const SearchCoaches = () => {
 
   const handleCampusChange = (event) => {
     setCampus(event.target.value);
+  };
+
+  // Function to handle button click for viewing details
+  const handleViewDetails = (coach) => {
+    // Implement the logic to view coach details, e.g., navigate to a details page or show a modal
+  
+       navigate(`/coach/${coach.coach_id}`);
+
   };
 
   return (
@@ -243,11 +252,10 @@ const SearchCoaches = () => {
               key={coach.id}
               style={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 alignItems: "center",
                 marginTop: "10px",
                 width: "100%", // Ensure the list item takes full width
-                flexGrow: 1, // Make the ListItem flexible
               }}
             >
               {coach.coach_img && (
@@ -262,6 +270,13 @@ const SearchCoaches = () => {
                 primary={`${coach.coach_fname} ${coach.coach_lname}`}
                 style={{ marginLeft: coach.coach_img ? "10px" : "0" }}
               />
+              <Button
+                variant="outlined"
+                onClick={() => handleViewDetails(coach)} // Handle button click
+                sx={{ marginLeft: "10px" }}
+              >
+                View Details
+              </Button>
             </ListItem>
           ))
         ) : (
