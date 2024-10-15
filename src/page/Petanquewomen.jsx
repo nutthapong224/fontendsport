@@ -34,7 +34,7 @@ const Petanquewomen = () => {
         variant={isMobileView ? "h5" : "h4"} // Adjust font size for mobile
         gutterBottom
       >
-        ลงทะเบียนนักกีฬา
+        เลือกประเภทการแข่งขัน
       </Typography>
 
       <ImageList

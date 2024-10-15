@@ -46,7 +46,7 @@ const Createplayer = () => {
         variant={isMobileView ? "h5" : "h4"} // Adjust font size for mobile
         gutterBottom
       >
-        ลงทะเบียนนักกีฬา
+        เลือกประเภทกีฬาที่แข่ง
       </Typography>
 
       <ImageList
