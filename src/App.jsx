@@ -51,7 +51,8 @@ import Takrawpage from "./page/Takrawpage";
 import Takrawwomen from "./page/Takrawwomen"; 
 import Takrawmenpage from "./page/Takrawmenpage"; 
 import Playerdetail from "./page/Playerdetail"; 
-import CoachDetail from "./page/Coachdetail";
+import CoachDetail from "./page/Coachdetail"; 
+import ExportExcelButton from "./page/Exportplayer";
 
 
 
@@ -63,6 +64,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/exportplayer" element={<ExportExcelButton />} />
         <Route path="/player/:id" element={<Playerdetail />} />
         <Route path="/coach/:id" element={<CoachDetail />} />
         <Route path="/createcoach" element={<CreateCoach />} />
