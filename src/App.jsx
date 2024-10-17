@@ -1,5 +1,10 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import CreatePlayerfootball from "./page/Football"; // Import the CreatePlayer component
 import CreateCoach from "./page/CreateCoach";  
 import Home from "./page/Home"; 
@@ -27,8 +32,9 @@ import Petanquedoublemen from "./page/Petanquedoublemen"
 import Petanquedoublewomen from "./page/Petanquedoublewomen"; 
 import Petanquedoublemix from "./page/Petanquedoublemix"; 
 import Petanquesinglewomen from "./page/Petanquesinglewomen"; 
-import Takrawdoublemen from "./page/Takrawdoublemen "; 
-import Takrawdoublewomen from "./page/Takrawdoublewomen"; 
+import Takrawdoublemen from "./page/Takrawdoublemen ";  
+import Exportcoach from "./page/Exportcoach";
+
 import Takrawsinglemen  from "./page/Takrawsinglemen"; 
 import Takrawsinglewomen from "./page/Takrawsinglewomen"; 
 import Takrawteammen from "./page/Takrawteammen"; 
@@ -52,10 +58,20 @@ import Takrawwomen from "./page/Takrawwomen";
 import Takrawmenpage from "./page/Takrawmenpage"; 
 import Playerdetail from "./page/Playerdetail"; 
 import CoachDetail from "./page/Coachdetail"; 
-import ExportExcelButton from "./page/Exportplayer";
+import ExportExcelButton from "./page/Exportplayer"; 
 
+import LoginPage from "./page/Login";
 
+const useAuth = () => {
+  const token = localStorage.getItem("token");
+  return !!token; // Returns true if the token exists
+};
 
+// Private route component for protecting the Logout page
+const PrivateRoute = ({ children }) => {
+  const isAuth = useAuth();
+  return isAuth ? children : <Navigate to="/login" />;
+};
 
 
 
@@ -64,7 +80,32 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/exportplayer" element={<ExportExcelButton />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/logout"
+          element={
+            <PrivateRoute>
+              <LogoutPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/exportplayer"
+          element={
+            <PrivateRoute>
+              <ExportExcelButton />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/exportcoach"
+          element={
+            <PrivateRoute>
+              <Exportcoach />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/player/:id" element={<Playerdetail />} />
         <Route path="/coach/:id" element={<CoachDetail />} />
         <Route path="/createcoach" element={<CreateCoach />} />
@@ -101,7 +142,7 @@ function App() {
         <Route path="/badmintondoublemen" element={<Badmintondoublemen />} />
         <Route path="/badmintonsinglemen" element={<Badmintonsinglemen />} />
         <Route path="/takrawdoublemen" element={<Takrawdoublemen />} />
-        <Route path="/takrawdoublewomen" element={<Takrawdoublewomen />} />
+
         <Route path="/takrawsinglemen" element={<Takrawsinglemen />} />
         <Route path="/takrawsinglewomen" element={<Takrawsinglewomen />} />
         <Route path="/takrawteammen" element={<Takrawteammen />} />

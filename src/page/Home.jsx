@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Grid2, ImageListItem, Typography, Box } from "@mui/material"; // Import Grid2 instead of Grid
 import { useNavigate } from "react-router-dom";
-import playerIcon from "../assets/icon.jpg"; // Import the image
+import playerIcon from "../assets/icon.jpg"; 
+import player from "../assets/player.png"  
+import coach from "../assets/coach.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ const Home = () => {
             </Typography>
             <ImageListItem>
               <img
-                src={playerIcon}
+                src={coach}
                 alt="Coach"
                 style={{
                   borderRadius: "10px",
@@ -103,7 +105,7 @@ const Home = () => {
             </Typography>
             <ImageListItem>
               <img
-                src={playerIcon}
+                src={player}
                 alt="Players"
                 style={{
                   borderRadius: "10px",

@@ -12,7 +12,9 @@ import { useNavigate } from "react-router-dom";
 import playerfootball from "../assets/football.jpg";
 import playerfutsal from "../assets/fulsal.jpg";
 import playerbasketball from "../assets/basketball.jpg";
-
+import men from "../assets/singlemen.png";
+import doublemen from "../assets/doublemen.png"; 
+import teammen from "../assets/teammen.png"
 
 const Takrawmenpage = () => {
   const navigate = useNavigate();
@@ -22,11 +24,17 @@ const Takrawmenpage = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "เซปักตะกร้อชายเดียว", path: "/takrawsinglemen", icon: playerfutsal },
-    { label: "เซปักตะกร้อชายคู่", path: "/takrawdoublemen", icon: playerbasketball }, 
-    { label: "เซปักตะกร้อชายทีมชุด", path: "/takrawteammen", icon: playerfutsal },
-  
+    { label: "เซปักตะกร้อชายเดียว", path: "/takrawsinglemen", icon: men },
+    {
+      label: "เซปักตะกร้อชายคู่",
+      path: "/takrawdoublemen",
+      icon: doublemen,
+    },
+    {
+      label: "เซปักตะกร้อชายทีมชุด",
+      path: "/takrawteammen",
+      icon: teammen,
+    },
   ];
 
   return (

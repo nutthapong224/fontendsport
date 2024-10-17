@@ -11,7 +11,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import playerfootball from "../assets/football.jpg";
 import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+import playerbasketball from "../assets/basketball.jpg"; 
+import teammen from "../assets/men.png"; 
+import teamwomen from "../assets/women.png";
 
 
 const Futsalpage = () => {
@@ -22,10 +24,8 @@ const Futsalpage = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "ฟุตซอลผู้ชาย", path: "/futsalmen", icon: playerfutsal },
-    { label: "ฟุตซอลผู้หญิง", path: "/futsalwomen", icon: playerbasketball },
-   
+    { label: "ฟุตซอลผู้ชาย", path: "/futsalmen", icon: teammen },
+    { label: "ฟุตซอลผู้หญิง", path: "/futsalwomen", icon: teamwomen },
   ];
 
   return (

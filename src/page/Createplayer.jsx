@@ -9,16 +9,16 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
-import playervolleyball from "../assets/volleyball.jpg";
-import playertabletenis from "../assets/tabletenis.jpg";
-import playerpetanque from "../assets/petanque.jpg";
-import playerbadminton from "../assets/badminton.jpg";
-import playertakraw from "../assets/takraw.jpg";
-import hooptakraw from "../assets/hooptakraw.jpg";
-import esport from "../assets/esport.jpg";
+import playerfootball from "../assets/football.png";
+import playerfutsal from "../assets/futsal.png";
+import playerbasketball from "../assets/basketball.png";
+import playervolleyball from "../assets/volleyball.png";
+import playertabletenis from "../assets/tabletenis.png";
+import playerpetanque from "../assets/petanque.png";
+import playerbadminton from "../assets/badminton.png";
+import playertakraw from "../assets/takraw.png";
+import hooptakraw from "../assets/hooptakraw.png";
+import esport from "../assets/esport.png";
 
 const Createplayer = () => {
   const navigate = useNavigate();

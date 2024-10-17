@@ -8,18 +8,19 @@ import {
   MenuItem,
 } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // For redirecting after logout
 import { apiRequest } from "../api"; // Adjust the import path as necessary
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-const ExportExcelButton = () => {
+const Exportcoach = () => {
   const [campus, setCampus] = useState("");
   const [sportType, setSportType] = useState("");
   const [campuses, setCampuses] = useState([]);
   const [sportTypes, setSportTypes] = useState([]);
-  const navigate = useNavigate(); // Used for navigating after logout
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   const handleExport = async () => {
     try {
+      // Build the query string based on the selected filters
       const queryParams = new URLSearchParams();
       if (campus) queryParams.append("campus", campus);
       if (sportType) queryParams.append("sportType", sportType);
@@ -27,16 +28,17 @@ const ExportExcelButton = () => {
       const response = await axios.get(
         `${
           import.meta.env.VITE_API_URL
-        }/api/admin/excel?${queryParams.toString()}`,
+        }/api/admin/excelcoach?${queryParams.toString()}`,
         {
-          responseType: "blob",
+          responseType: "blob", // Ensure the response is a binary file
         }
       );
 
+      // Create a URL for the downloaded file
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "players.xlsx");
+      link.setAttribute("download", "coach.xlsx"); // File name
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -46,15 +48,15 @@ const ExportExcelButton = () => {
   };
 
   const handleReset = () => {
+    // Reset campus and sportType values to empty strings
     setCampus("");
     setSportType("");
   };
 
   const handleLogout = () => {
-    // Clear the token from localStorage or sessionStorage
-    localStorage.removeItem("token");
-    // Redirect the user to the login page
-    navigate("/login");
+    // Perform logout logic here (e.g., clear user data, tokens)
+    localStorage.removeItem("token"); // Remove token from localStorage
+    navigate("/login"); // Redirect to the login page
   };
 
   useEffect(() => {
@@ -167,7 +169,7 @@ const ExportExcelButton = () => {
       {/* Logout Button */}
       <Grid item xs={12}>
         <Button
-          variant="contained"
+          variant="outlined"
           color="error"
           onClick={handleLogout}
           sx={{ marginTop: "20px" }}
@@ -179,4 +181,4 @@ const ExportExcelButton = () => {
   );
 };
 
-export default ExportExcelButton;
+export default Exportcoach;

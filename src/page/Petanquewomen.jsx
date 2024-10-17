@@ -10,8 +10,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+
+import playersingle from "../assets/singlemen.png";
+import playerdoublemen from "../assets/doublemen.png";
 
 
 const Petanquewomen = () => {
@@ -23,8 +24,8 @@ const Petanquewomen = () => {
 
   const items = [
   
-    { label: "เปตองหญิงเดี่ยว", path: "/petanquesinglewomen", icon: playerfutsal },
-    { label: "เปตองหญิงคู่", path: "/petanquedoublewomen", icon: playerbasketball }
+    { label: "เปตองหญิงเดี่ยว", path: "/petanquesinglewomen", icon: playersingle },
+    { label: "เปตองหญิงคู่", path: "/petanquedoublewomen", icon: playerdoublemen }
    
   ];
 

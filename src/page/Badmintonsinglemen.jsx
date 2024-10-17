@@ -12,8 +12,8 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { apiRequest, handleFileUpload } from "../api"; 
-import { useNavigate } from "react-router-dom"; 
+import { apiRequest, handleFileUpload } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Badmintonsinglemen = () => {
   const navigate = useNavigate();
@@ -26,9 +26,9 @@ const Badmintonsinglemen = () => {
   });
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [titles, setTitles] = useState([]); // State to store fetched titles
-  const [campuses, setCampuses] = useState([]); // State to store fetched campuses
-  const [sportTypes, setSportTypes] = useState([]); // State to store fetched sport types
+  const [titles, setTitles] = useState([]);
+  const [campuses, setCampuses] = useState([]);
+  const [sportTypes, setSportTypes] = useState([]);
 
   // Fetch titles from API when component mounts
   useEffect(() => {
@@ -38,7 +38,7 @@ const Badmintonsinglemen = () => {
           url: "/api/titles",
           method: "GET",
         });
-        setTitles(response); // Update the titles state with fetched data
+        setTitles(response);
       } catch (error) {
         console.error("Error fetching titles:", error);
         setMessage("Failed to load titles.");
@@ -56,7 +56,7 @@ const Badmintonsinglemen = () => {
           url: "/api/campuses",
           method: "GET",
         });
-        setCampuses(response); // Update the campuses state with fetched data
+        setCampuses(response);
       } catch (error) {
         console.error("Error fetching campuses:", error);
         setMessage("Failed to load campuses.");
@@ -64,24 +64,6 @@ const Badmintonsinglemen = () => {
     };
 
     fetchCampuses();
-  }, []);
-
-  // Fetch sport types from API when component mounts
-  useEffect(() => {
-    const fetchSportTypes = async () => {
-      try {
-        const response = await apiRequest({
-          url: "/api/sporttypes",
-          method: "GET",
-        });
-        setSportTypes(response); // Update the sport types state with fetched data
-      } catch (error) {
-        console.error("Error fetching sport types:", error);
-        setMessage("Failed to load sport types.");
-      }
-    };
-
-    fetchSportTypes();
   }, []);
 
   // Handle input change
@@ -104,7 +86,7 @@ const Badmintonsinglemen = () => {
 
     if (!imageFile) {
       setMessage("Please upload an image.");
-      return; // Exit early if no image is provided
+      return;
     }
 
     try {
@@ -114,17 +96,17 @@ const Badmintonsinglemen = () => {
       // Prepare the data to send to your backend
       const dataToSend = {
         ...playerData,
-        img: imageUrl, // Add the uploaded image URL to 'img'
+        img: imageUrl,
       };
 
       // Send the data to your backend API
       const response = await apiRequest({
-        url: "/api/players/create", // Update the URL based on your endpoint
+        url: "/api/players/create",
         data: dataToSend,
         method: "POST",
       });
 
-      setMessage(response.message); // Show success message
+      setMessage(response.message);
 
       // Navigate to a different route on success
       navigate("/searchplayers");
@@ -134,12 +116,12 @@ const Badmintonsinglemen = () => {
         title: "",
         fname: "",
         lname: "",
-        sporttypes: "",
+        sporttypes: "แบตมินตันชายเดี่ยว",
         campus: "",
       });
       setImageFile(null);
     } catch (error) {
-      setMessage(error.message); // Show error message
+      setMessage(error.message);
     }
   };
 
@@ -150,7 +132,7 @@ const Badmintonsinglemen = () => {
           <Typography variant="h4" component="h2" gutterBottom align="center">
             แบตมินตันชายเดี่ยว
           </Typography>
-          {message && <Alert severity="info">{message}</Alert>}{" "}
+          {message && <Alert severity="info">{message}</Alert>}
           <form onSubmit={handleSubmit} style={{ width: "100%" }}>
             <FormControl fullWidth margin="normal" required>
               <InputLabel id="title">คำนำหน้า</InputLabel>
@@ -160,7 +142,6 @@ const Badmintonsinglemen = () => {
                 value={playerData.title}
                 onChange={handleChange}
               >
-                {/* Map over titles state to create dropdown options */}
                 {titles.map((title) => (
                   <MenuItem key={title.title_id} value={title.title_name}>
                     {title.title_name}
@@ -195,7 +176,6 @@ const Badmintonsinglemen = () => {
                 value={playerData.campus}
                 onChange={handleChange}
               >
-                {/* Map over campuses state to create dropdown options */}
                 {campuses.map((campus) => (
                   <MenuItem key={campus.campus_id} value={campus.campus_name}>
                     {campus.campus_name}
@@ -203,6 +183,7 @@ const Badmintonsinglemen = () => {
                 ))}
               </Select>
             </FormControl>
+
             <input
               type="file"
               accept="image/*"
@@ -214,7 +195,7 @@ const Badmintonsinglemen = () => {
               variant="contained"
               color="primary"
               type="submit"
-              sx={{ display: "block", mx: "auto" }} // Center the button
+              sx={{ display: "block", mx: "auto" }}
             >
               ลงทะเบียน
             </Button>

@@ -9,9 +9,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+import teammen from "../assets/men.png";
+import teamwomen from "../assets/women.png";
+
 
 
 const Volleyballpage = () => {
@@ -22,10 +22,12 @@ const Volleyballpage = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "วอลเลย์บอลชาย", path: "/volleyballmen", icon: playerfutsal },
-    { label: "วอลเลย์บอลหญิง", path: "/volleyballwomen", icon: playerbasketball },
-   
+    { label: "วอลเลย์บอลชาย", path: "/volleyballmen", icon: teammen },
+    {
+      label: "วอลเลย์บอลหญิง",
+      path: "/volleyballwomen",
+      icon: teamwomen,
+    },
   ];
 
   return (

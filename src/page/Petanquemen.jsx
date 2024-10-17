@@ -9,9 +9,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+
+import playersingle from "../assets/singlemen.png";
+import playerdoublemen from "../assets/doublemen.png";
 
 
 const Petanquemen = () => {
@@ -22,10 +22,12 @@ const Petanquemen = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "เปตองชายเดี่ยว", path: "/petanquesinglemen", icon: playerfutsal },
-    { label: "เปตองชายคู่", path: "/petanquedoublemen", icon: playerbasketball }
-   
+    { label: "เปตองชายเดี่ยว", path: "/petanquesinglemen", icon: playersingle },
+    {
+      label: "เปตองชายคู่",
+      path: "/petanquedoublemen",
+      icon: playerdoublemen,
+    },
   ];
 
   return (

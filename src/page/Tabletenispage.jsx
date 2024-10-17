@@ -10,8 +10,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+import singlemen from "../assets/men.png";
+import singlewomen from "../assets/women.png"; 
+import playermix from "../assets/playermix.png"; 
 
 
 const Tabletenispage = () => {
@@ -22,10 +23,13 @@ const Tabletenispage = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "เทเบิลเทนิสชาย", path: "/tabletenismen", icon: playerfutsal },
-    { label: "เทเบิลเทนิสหญิง", path: "/tableteniswomen", icon: playerbasketball },
-    { label: "เทเบิลผสม", path: "/tabletenismix", icon: playerbasketball },
+    { label: "เทเบิลเทนิสชาย", path: "/tabletenismen", icon: singlemen },
+    {
+      label: "เทเบิลเทนิสหญิง",
+      path: "/tableteniswomen",
+      icon: singlewomen,
+    },
+    { label: "เทเบิลผสม", path: "/tabletenismix", icon: playermix },
   ];
 
   return (

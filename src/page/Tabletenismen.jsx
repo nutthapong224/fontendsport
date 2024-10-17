@@ -9,10 +9,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
 
+import playersingle from "../assets/singlemen.png";
+import playerdoublemen from "../assets/doublemen.png";
 
 const Tabletenismen = () => {
   const navigate = useNavigate();
@@ -22,10 +21,16 @@ const Tabletenismen = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "เทเบิลเทนนิสชายเดี่ยว", path: "/tabletenissinglemen", icon: playerfutsal },
-    { label: "เทเบิลเทนนิสคู่ชาย", path: "/tabletenisdoublemen", icon: playerbasketball },
-   
+    {
+      label: "เทเบิลเทนนิสชายเดี่ยว",
+      path: "/tabletenissinglemen",
+      icon: playersingle,
+    },
+    {
+      label: "เทเบิลเทนนิสคู่ชาย",
+      path: "/tabletenisdoublemen",
+      icon: playerdoublemen,
+    },
   ];
 
   return (

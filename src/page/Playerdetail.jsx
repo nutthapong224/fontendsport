@@ -11,9 +11,9 @@ const PlayerDetails = () => {
     const fetchPlayer = async () => {
       try {
         const response = await axios.get(
-          import.meta.env.VITE_API_URL + `/api/player/${id}`
+          `${import.meta.env.VITE_API_URL}/api/player/${id}`
         );
-        setPlayer(response.data);
+        setPlayer(response.data); // Store the player data
       } catch (err) {
         console.error("Error fetching player details:", err);
       }
@@ -27,7 +27,7 @@ const PlayerDetails = () => {
       {player ? (
         <>
           <Avatar
-            src={player.img}
+            src={`${import.meta.env.VITE_API_URL}${player.img}`} // Dynamically set the image URL
             alt={`${player.fname} ${player.lname}`}
             sx={{ width: "100px", height: "100px", margin: "0 auto" }}
           />
@@ -35,6 +35,7 @@ const PlayerDetails = () => {
             {`${player.fname} ${player.lname}`}
           </Typography>
           <Typography variant="h6">{`Campus: ${player.campus}`}</Typography>
+          <Typography variant="h6">{`Image Path: ${player.img}`}</Typography>
           <Typography variant="h6">{`Sport: ${player.sporttypes}`}</Typography>
         </>
       ) : (

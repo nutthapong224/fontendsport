@@ -239,7 +239,7 @@ const SearchPlayers = () => {
               {player.img && (
                 <ListItemAvatar>
                   <Avatar
-                    src={player.img}
+                    src={`${import.meta.env.VITE_API_URL}${player.img}`} 
                     alt={`${player.fname} ${player.lname}`}
                     sx={{ width: "50px", height: "50px" }}
                   />

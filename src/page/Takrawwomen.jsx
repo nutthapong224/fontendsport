@@ -9,9 +9,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+
+import women from "../assets/singlewomen.png";
 
 
 const Takrawwomen = () => {
@@ -22,11 +21,7 @@ const Takrawwomen = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "เซปักตะกร้อหญิงเดี่ยว", path: "/takrawsinglewomen", icon: playerfutsal },
-    { label: "เซปักตะกร้อหญิงคู่", path: "/takrawdoublewomen", icon: playerbasketball }
-  
-  
+    { label: "เซปักตะกร้อหญิงเดี่ยว", path: "/takrawsinglewomen", icon: women },
   ];
 
   return (

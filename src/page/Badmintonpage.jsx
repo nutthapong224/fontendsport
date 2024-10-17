@@ -9,9 +9,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import playerfootball from "../assets/football.jpg";
-import playerfutsal from "../assets/fulsal.jpg";
-import playerbasketball from "../assets/basketball.jpg";
+
+import singlemen from "../assets/men.png";
+import singlewomen from "../assets/women.png";
+import playermix from "../assets/playermix.png"; 
 
 
 const Badmintonpage = () => {
@@ -22,10 +23,9 @@ const Badmintonpage = () => {
   const isMobileView = useMediaQuery("(max-width:450px)"); // Detect mobile view size
 
   const items = [
-  
-    { label: "แบตมินตันชาย", path: "/badmintonmen", icon: playerfutsal },
-    { label: "แบตมินตันหญิง", path: "/badmintonwomen", icon: playerbasketball },
-    { label: "แบตมินตันผสม", path: "/badmintonmix", icon: playerbasketball },
+    { label: "แบตมินตันชาย", path: "/badmintonmen", icon: singlemen },
+    { label: "แบตมินตันหญิง", path: "/badmintonwomen", icon: singlewomen },
+    { label: "แบตมินตันผสม", path: "/badmintonmix", icon: playermix },
   ];
 
   return (
