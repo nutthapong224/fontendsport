@@ -12,7 +12,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { apiRequest, handleFileUpload } from "../api";
+import axios from "axios"; // Ensure axios is imported
 import { useNavigate } from "react-router-dom";
 
 const Badmintonsinglemen = () => {
@@ -23,50 +23,33 @@ const Badmintonsinglemen = () => {
     lname: "",
     sporttypes: "แบตมินตันชายเดี่ยว",
     campus: "",
+    studentid: "",
   });
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [titles, setTitles] = useState([]);
   const [campuses, setCampuses] = useState([]);
-  const [sportTypes, setSportTypes] = useState([]);
 
-  // Fetch titles from API when component mounts
+  // Fetch titles and campuses from API
   useEffect(() => {
-    const fetchTitles = async () => {
+    const fetchData = async () => {
       try {
-        const response = await apiRequest({
-          url: "/api/titles",
-          method: "GET",
-        });
-        setTitles(response);
+        const [titlesRes, campusesRes] = await Promise.all([
+          axios.get(`${import.meta.env.VITE_API_URL}/api/titles`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/campuses`),
+        ]);
+        setTitles(titlesRes.data);
+        setCampuses(campusesRes.data);
       } catch (error) {
-        console.error("Error fetching titles:", error);
-        setMessage("Failed to load titles.");
+        console.error("Error fetching data:", error);
+        setMessage("Failed to load data.");
       }
     };
 
-    fetchTitles();
+    fetchData();
   }, []);
 
-  // Fetch campuses from API when component mounts
-  useEffect(() => {
-    const fetchCampuses = async () => {
-      try {
-        const response = await apiRequest({
-          url: "/api/campuses",
-          method: "GET",
-        });
-        setCampuses(response);
-      } catch (error) {
-        console.error("Error fetching campuses:", error);
-        setMessage("Failed to load campuses.");
-      }
-    };
-
-    fetchCampuses();
-  }, []);
-
-  // Handle input change
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPlayerData((prevData) => ({
@@ -90,23 +73,26 @@ const Badmintonsinglemen = () => {
     }
 
     try {
-      // Upload image to Cloudinary and get the URL
-      const imageUrl = await handleFileUpload(imageFile);
+      const formData = new FormData();
+      formData.append("title", playerData.title);
+      formData.append("fname", playerData.fname);
+      formData.append("lname", playerData.lname);
+      formData.append("campus", playerData.campus);
+      formData.append("sporttypes", playerData.sporttypes);
+      formData.append("studentid", playerData.studentid);
+      formData.append("img", imageFile); // Append the actual image file
 
-      // Prepare the data to send to your backend
-      const dataToSend = {
-        ...playerData,
-        img: imageUrl,
-      };
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/players/create`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Specify content type for file uploads
+          },
+        }
+      );
 
-      // Send the data to your backend API
-      const response = await apiRequest({
-        url: "/api/players/create",
-        data: dataToSend,
-        method: "POST",
-      });
-
-      setMessage(response.message);
+      setMessage(response.data.message); // Show success message
 
       // Navigate to a different route on success
       navigate("/searchplayers");
@@ -116,12 +102,16 @@ const Badmintonsinglemen = () => {
         title: "",
         fname: "",
         lname: "",
-        sporttypes: "แบตมินตันชายเดี่ยว",
+        sporttypes: "",
         campus: "",
+        studentid: "",
       });
       setImageFile(null);
     } catch (error) {
-      setMessage(error.message);
+      console.error("Error during submission:", error);
+      setMessage(
+        error.response ? error.response.data.message : "An error occurred."
+      );
     }
   };
 
@@ -134,6 +124,15 @@ const Badmintonsinglemen = () => {
           </Typography>
           {message && <Alert severity="info">{message}</Alert>}
           <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+            <TextField
+              label="รหัสนักศึกษา"
+              name="studentid"
+              value={playerData.studentid}
+              onChange={handleChange}
+              required
+              fullWidth
+              margin="normal"
+            />
             <FormControl fullWidth margin="normal" required>
               <InputLabel id="title">คำนำหน้า</InputLabel>
               <Select
@@ -167,7 +166,6 @@ const Badmintonsinglemen = () => {
               fullWidth
               margin="normal"
             />
-
             <FormControl fullWidth margin="normal" required>
               <InputLabel id="campus">วิทยาเขต</InputLabel>
               <Select
@@ -183,7 +181,6 @@ const Badmintonsinglemen = () => {
                 ))}
               </Select>
             </FormControl>
-
             <input
               type="file"
               accept="image/*"
@@ -195,7 +192,7 @@ const Badmintonsinglemen = () => {
               variant="contained"
               color="primary"
               type="submit"
-              sx={{ display: "block", mx: "auto" }}
+              sx={{ display: "block", mx: "auto" }} // Center the button
             >
               ลงทะเบียน
             </Button>

@@ -34,9 +34,9 @@ const PlayerDetails = () => {
           <Typography variant="h4" sx={{ marginTop: "20px" }}>
             {`${player.fname} ${player.lname}`}
           </Typography>
-          <Typography variant="h6">{`Campus: ${player.campus}`}</Typography>
-          <Typography variant="h6">{`Image Path: ${player.img}`}</Typography>
-          <Typography variant="h6">{`Sport: ${player.sporttypes}`}</Typography>
+          <Typography variant="h6">{`วิทยาเขต: ${player.campus}`}</Typography>
+       
+          <Typography variant="h6">{`ประเภทกีฬา: ${player.sporttypes}`}</Typography>
         </>
       ) : (
         <Typography>Loading player details...</Typography>

@@ -12,79 +12,44 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { apiRequest, handleFileUpload } from "../api"; // Adjust the import path as necessary
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import axios from "axios"; // Ensure axios is imported
+import { useNavigate } from "react-router-dom";
 
-const Volleyballwomen = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+const Tabletenisdoublemen = () => {
+  const navigate = useNavigate();
   const [playerData, setPlayerData] = useState({
     title: "",
     fname: "",
     lname: "",
     sporttypes: "วอลเลย์บอลหญิง",
     campus: "",
+    studentid: "",
   });
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [titles, setTitles] = useState([]); // State to store fetched titles
-  const [campuses, setCampuses] = useState([]); // State to store fetched campuses
-  const [sportTypes, setSportTypes] = useState([]); // State to store fetched sport types
+  const [titles, setTitles] = useState([]);
+  const [campuses, setCampuses] = useState([]);
 
-  // Fetch titles from API when component mounts
+  // Fetch titles and campuses from API
   useEffect(() => {
-    const fetchTitles = async () => {
+    const fetchData = async () => {
       try {
-        const response = await apiRequest({
-          url: "/api/titles",
-          method: "GET",
-        });
-        setTitles(response); // Update the titles state with fetched data
+        const [titlesRes, campusesRes] = await Promise.all([
+          axios.get(`${import.meta.env.VITE_API_URL}/api/titles`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/campuses`),
+        ]);
+        setTitles(titlesRes.data);
+        setCampuses(campusesRes.data);
       } catch (error) {
-        console.error("Error fetching titles:", error);
-        setMessage("Failed to load titles.");
+        console.error("Error fetching data:", error);
+        setMessage("Failed to load data.");
       }
     };
 
-    fetchTitles();
+    fetchData();
   }, []);
 
-  // Fetch campuses from API when component mounts
-  useEffect(() => {
-    const fetchCampuses = async () => {
-      try {
-        const response = await apiRequest({
-          url: "/api/campuses",
-          method: "GET",
-        });
-        setCampuses(response); // Update the campuses state with fetched data
-      } catch (error) {
-        console.error("Error fetching campuses:", error);
-        setMessage("Failed to load campuses.");
-      }
-    };
-
-    fetchCampuses();
-  }, []);
-
-  // Fetch sport types from API when component mounts
-  useEffect(() => {
-    const fetchSportTypes = async () => {
-      try {
-        const response = await apiRequest({
-          url: "/api/sporttypes",
-          method: "GET",
-        });
-        setSportTypes(response); // Update the sport types state with fetched data
-      } catch (error) {
-        console.error("Error fetching sport types:", error);
-        setMessage("Failed to load sport types.");
-      }
-    };
-
-    fetchSportTypes();
-  }, []);
-
-  // Handle input change
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPlayerData((prevData) => ({
@@ -104,27 +69,30 @@ const Volleyballwomen = () => {
 
     if (!imageFile) {
       setMessage("Please upload an image.");
-      return; // Exit early if no image is provided
+      return;
     }
 
     try {
-      // Upload image to Cloudinary and get the URL
-      const imageUrl = await handleFileUpload(imageFile);
+      const formData = new FormData();
+      formData.append("title", playerData.title);
+      formData.append("fname", playerData.fname);
+      formData.append("lname", playerData.lname);
+      formData.append("campus", playerData.campus);
+      formData.append("sporttypes", playerData.sporttypes);
+      formData.append("studentid", playerData.studentid);
+      formData.append("img", imageFile); // Append the actual image file
 
-      // Prepare the data to send to your backend
-      const dataToSend = {
-        ...playerData,
-        img: imageUrl, // Add the uploaded image URL to 'img'
-      };
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/players/create`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Specify content type for file uploads
+          },
+        }
+      );
 
-      // Send the data to your backend API
-      const response = await apiRequest({
-        url: "/api/players/create", // Update the URL based on your endpoint
-        data: dataToSend,
-        method: "POST",
-      });
-
-      setMessage(response.message); // Show success message
+      setMessage(response.data.message); // Show success message
 
       // Navigate to a different route on success
       navigate("/searchplayers");
@@ -135,11 +103,15 @@ const Volleyballwomen = () => {
         fname: "",
         lname: "",
         sporttypes: "",
-        campus: "", // Reset campus
+        campus: "",
+        studentid: "",
       });
       setImageFile(null);
     } catch (error) {
-      setMessage(error.message); // Show error message
+      console.error("Error during submission:", error);
+      setMessage(
+        error.response ? error.response.data.message : "An error occurred."
+      );
     }
   };
 
@@ -150,8 +122,17 @@ const Volleyballwomen = () => {
           <Typography variant="h4" component="h2" gutterBottom align="center">
             วอลเลย์บอลหญิง
           </Typography>
-          {message && <Alert severity="info">{message}</Alert>}{" "}
+          {message && <Alert severity="info">{message}</Alert>}
           <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+            <TextField
+              label="รหัสนักศึกษา"
+              name="studentid"
+              value={playerData.studentid}
+              onChange={handleChange}
+              required
+              fullWidth
+              margin="normal"
+            />
             <FormControl fullWidth margin="normal" required>
               <InputLabel id="title">คำนำหน้า</InputLabel>
               <Select
@@ -160,7 +141,6 @@ const Volleyballwomen = () => {
                 value={playerData.title}
                 onChange={handleChange}
               >
-                {/* Map over titles state to create dropdown options */}
                 {titles.map((title) => (
                   <MenuItem key={title.title_id} value={title.title_name}>
                     {title.title_name}
@@ -186,7 +166,6 @@ const Volleyballwomen = () => {
               fullWidth
               margin="normal"
             />
-
             <FormControl fullWidth margin="normal" required>
               <InputLabel id="campus">วิทยาเขต</InputLabel>
               <Select
@@ -195,7 +174,6 @@ const Volleyballwomen = () => {
                 value={playerData.campus}
                 onChange={handleChange}
               >
-                {/* Map over campuses state to create dropdown options */}
                 {campuses.map((campus) => (
                   <MenuItem key={campus.campus_id} value={campus.campus_name}>
                     {campus.campus_name}
@@ -225,4 +203,4 @@ const Volleyballwomen = () => {
   );
 };
 
-export default Volleyballwomen;
+export default Tabletenisdoublemen;

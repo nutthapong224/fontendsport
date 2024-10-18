@@ -81,14 +81,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/logout"
-          element={
-            <PrivateRoute>
-              <LogoutPage />
-            </PrivateRoute>
-          }
-        />
+    
         <Route
           path="/exportplayer"
           element={

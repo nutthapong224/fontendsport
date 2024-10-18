@@ -15,7 +15,7 @@ import {
 import axios from "axios"; // Ensure axios is imported
 import { useNavigate } from "react-router-dom";
 
-const Takrawsinglemen = () => {
+const Tabletenisdoublemen = () => {
   const navigate = useNavigate();
   const [playerData, setPlayerData] = useState({
     title: "",
@@ -102,7 +102,7 @@ const Takrawsinglemen = () => {
         title: "",
         fname: "",
         lname: "",
-        sporttypes: "เซปักตะกร้อชายเดี่ยว",
+        sporttypes: "",
         campus: "",
         studentid: "",
       });
@@ -203,4 +203,4 @@ const Takrawsinglemen = () => {
   );
 };
 
-export default Takrawsinglemen;
+export default Tabletenisdoublemen;
